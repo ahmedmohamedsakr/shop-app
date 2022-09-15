@@ -1,16 +1,12 @@
 # shop_app
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*Shop App: I started to apply in this project what I learned from the course (flutter clean architecture) by Eng/ Usama elgendy.
+*Some of the things I learned from this experience are writing clean code and applying the principles of design patterns.
+*App Features:
+...Clean architecture.
+...Get_it (Service Locator).
+...Bloc(cubit).
+...Rest API.
+...Shared Preference.
+...TypeAhead (for auto-complete search).
+...Animation.
