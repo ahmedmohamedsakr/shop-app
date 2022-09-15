@@ -11,6 +11,7 @@ import 'package:shop_app/core/utils/navigation.dart';
 import 'package:shop_app/core/services/cache_helper.dart';
 import 'package:shop_app/core/services/service_locator.dart';
 import 'package:shop_app/core/utils/common_widget.dart';
+import 'package:shop_app/presentation/controllers/home_cubit/home_cubit.dart';
 import 'package:shop_app/presentation/controllers/login_cubit/login_cubit.dart';
 import 'package:shop_app/presentation/screens/home_layout_screen.dart';
 import 'package:shop_app/presentation/screens/register_screen.dart';

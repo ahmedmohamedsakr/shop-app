@@ -44,18 +44,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit()
-            ..getHomeData()
-            ..getCategories()
-            ..getFavorites()
-            ..getProfile()
-            ..getCarts(),
-        ),
-        BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
-      ],
+    return BlocProvider(
+      create: (context) => HomeCubit()
+        ..getHomeData()
+        ..getCategories()
+        ..getFavorites()
+        ..getProfile()
+        ..getCarts(),
       child: MaterialApp(
         title: 'Shop App',
         debugShowCheckedModeBanner: false,
@@ -65,3 +60,22 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// class Home extends StatelessWidget {
+//   Widget initialPage;
+//
+//   Home({Key? key, required this.initialPage}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider(
+//       create: (context) => HomeCubit()
+//         ..getHomeData()
+//         ..getCategories()
+//         ..getFavorites()
+//         ..getProfile()
+//         ..getCarts(),
+//       child: initialPage,
+//     );
+//   }
+// }

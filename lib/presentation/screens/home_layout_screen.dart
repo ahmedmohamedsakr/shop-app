@@ -32,17 +32,6 @@ class HomeLayoutScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Salla'),
-            // actions: [
-            //   IconButton(
-            //     onPressed: () {
-            //       navigateTo(context, SearchScreen());
-            //     },
-            //     icon: const Icon(IconlyBroken.search),
-            //   ),
-            //   const SizedBox(
-            //     width: 12.0,
-            //   )
-            // ],
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(9.0),
@@ -84,38 +73,6 @@ class HomeLayoutScreen extends StatelessWidget {
               ],
             ),
           ),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   currentIndex: cubit.currentIndex,
-          //   onTap: (value) {
-          //     cubit.changeCurrentIndex(value);
-          //   },
-          //   items: const [
-          //     BottomNavigationBarItem(
-          //       label: 'Home',
-          //       icon: Icon(
-          //         IconlyBold.home,
-          //       ),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       label: 'Categories',
-          //       icon: Icon(
-          //         IconlyBold.category,
-          //       ),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       label: 'Favorites',
-          //       icon: Icon(
-          //         IconlyBold.heart,
-          //       ),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       label: 'Settings',
-          //       icon: Icon(
-          //         IconlyBold.setting,
-          //       ),
-          //     ),
-          //   ],
-          // ),
           body: pages[cubit.currentIndex],
         );
       },

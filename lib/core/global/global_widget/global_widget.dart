@@ -77,6 +77,6 @@ CachedNetworkImage buildCachedNetworkImage({
         ),
       ),
     ),
-    errorWidget: (context, url, error) => const Icon(Icons.error),
+    errorWidget: (context, url, error) => Image.asset('assets/images/empty-states.jpg'),
   );
 }

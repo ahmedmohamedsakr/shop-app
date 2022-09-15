@@ -33,7 +33,7 @@ SliverGrid newProductsComponent(Home? homeModel) {
 Widget buildGridProductItems(Products model, BuildContext context) {
   return GestureDetector(
     onTap: (){
-      navigateTo(context, DetailsScreen(model: model,));
+      navigateTo(context, DetailsScreen(model: model));
     },
     child: Card(
       shape: RoundedRectangleBorder(

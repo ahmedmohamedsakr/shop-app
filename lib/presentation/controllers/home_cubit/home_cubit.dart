@@ -12,8 +12,10 @@ import 'package:shop_app/domain/entities/categories/categories.dart';
 import 'package:shop_app/domain/entities/favorites/get_favorites.dart';
 import 'package:shop_app/domain/entities/favorites/post_favorites.dart';
 import 'package:shop_app/domain/entities/home/home.dart';
+import 'package:shop_app/domain/entities/home/products.dart';
 import 'package:shop_app/domain/entities/login.dart';
 import 'package:shop_app/domain/entities/profile/profile.dart';
+import 'package:shop_app/domain/entities/search_product/search_product.dart';
 import 'package:shop_app/domain/usecases/get_carts_usecase.dart';
 import 'package:shop_app/domain/usecases/get_categories_usecase.dart';
 import 'package:shop_app/domain/usecases/get_favorites_usecase.dart';
@@ -21,6 +23,7 @@ import 'package:shop_app/domain/usecases/get_home_data_usecase.dart';
 import 'package:shop_app/domain/usecases/get_profile_usecase.dart';
 import 'package:shop_app/domain/usecases/post_carts_usecase.dart';
 import 'package:shop_app/domain/usecases/post_favorites_usecase.dart';
+import 'package:shop_app/domain/usecases/search_usecase.dart';
 import 'package:shop_app/domain/usecases/update_profile_usecase.dart';
 
 part 'home_state.dart';
@@ -184,5 +187,21 @@ class HomeCubit extends Cubit<HomeState> {
       log(error.toString());
       emit(GetCartsErrorState(error.toString()));
     });
+  }
+
+  Future<List<Products?>> getUserSuggestion(String text) async {
+    SearchProduct? searchSuggestModel =
+    await sl<SearchUsecase>().execute(data: {
+      'text': text,
+    });
+    for(var searchProduct in searchSuggestModel.data){
+      for(var homeProduct in (homeData?.data?.products)!){
+        if (searchProduct.id==homeProduct.id) {
+          searchProduct.discount=homeProduct.discount;
+          searchProduct.oldPrice=homeProduct.oldPrice;
+        }
+      }
+    }
+    return searchSuggestModel.data;
   }
 }

@@ -52,9 +52,13 @@ class CartsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Total',
-                                    style:
-                                        Theme.of(context).textTheme.headline5,
+                                    'Total :',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
+                                          color: Colors.black54,
+                                        ),
                                   ),
                                   Text(
                                     '\$${cubit.cartsModel?.data.total.round()}',
@@ -62,7 +66,7 @@ class CartsScreen extends StatelessWidget {
                                         .textTheme
                                         .headline5!
                                         .copyWith(
-                                          color: Colors.deepOrange,
+                                          color: Colors.indigoAccent,
                                           fontWeight: FontWeight.w900,
                                         ),
                                   ),
@@ -78,7 +82,7 @@ class CartsScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
-                              color: Colors.deepOrange,
+                              color: Colors.indigoAccent,
                               onPressed: () {},
                               child: Text(
                                 'Buy Now',
@@ -87,6 +91,7 @@ class CartsScreen extends StatelessWidget {
                                     .headline5!
                                     .copyWith(
                                       color: Colors.white,
+                                      letterSpacing: 1.0,
                                     ),
                               ),
                             ),
@@ -109,25 +114,14 @@ class CartsScreen extends StatelessWidget {
       direction: DismissDirection.startToEnd,
       background: Container(
         decoration: BoxDecoration(
-          color: Colors.red,
           borderRadius: BorderRadius.circular(10.0),
         ),
         alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(
-                Icons.delete,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'Delete',
-              ),
-            ],
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Icon(
+            IconlyBold.delete,
+            color: Colors.pink,
           ),
         ),
       ),

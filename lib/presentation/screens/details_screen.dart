@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:like_button/like_button.dart';
+import 'package:shop_app/core/global/global_widget/global_widget.dart';
 import 'package:shop_app/core/utils/navigation.dart';
 import 'package:shop_app/domain/entities/home/products.dart';
 import 'package:shop_app/presentation/components/home_banner_component.dart';
@@ -16,30 +17,31 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class DetailsScreen extends StatelessWidget {
   Products model;
   PageController pageController = PageController();
-
+  //HomeCubit cubit;
   DetailsScreen({
     Key? key,
     required this.model,
+    // required this.cubit,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    log('details: ${model.id}');
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        // log('detail: ${HomeCubit.get(context).hashCode}');
-        // log('carts: ${HomeCubit.get(context).carts}');
-        // log('favorites: ${HomeCubit.get(context).favorites}');
         return SafeArea(
           child: Scaffold(
+            appBar: AppBar(),
             body: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(
+                  right: 15.0, left: 15.0, bottom: 10.0),
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
                   SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 100.0),
+                      padding: const EdgeInsets.only(bottom: 100.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -56,14 +58,6 @@ class DetailsScreen extends StatelessWidget {
                                   itemCount: model.images?.length,
                                   physics: const BouncingScrollPhysics(),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.black,
-                                    )),
                               ],
                             ),
                           ),
@@ -103,17 +97,23 @@ class DetailsScreen extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: () {
+                                  ///todo
                                   HomeCubit.get(context)
                                       .changeFavorites(id: model.id!);
+                                  // cubit.changeFavorites(id: model.id!);
                                 },
                                 padding: EdgeInsets.zero,
                                 icon: CircleAvatar(
                                   maxRadius: 18.0,
-                                  backgroundColor: Colors.grey.withOpacity(0.6),
+                                  backgroundColor:
+                                      Colors.grey.withOpacity(0.6),
                                   child: Icon(
                                     IconlyBold.heart,
                                     size: 21.0,
-                                    color: (HomeCubit.get(context).favorites[model.id]!)
+                                    ///todo
+                                    color: (HomeCubit.get(context)
+                                            .favorites[model.id]!)
+                                    // (cubit.favorites[model.id]!)
                                         ? Colors.red
                                         : Colors.white,
                                   ),
@@ -138,7 +138,7 @@ class DetailsScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 10.0,
                               ),
-                              if (model.discount != 0)
+                              if (model.price < model.oldPrice)
                                 Text(
                                   '\$${model.oldPrice.round()!}',
                                   style: Theme.of(context)
@@ -169,12 +169,14 @@ class DetailsScreen extends StatelessWidget {
                           ),
                           Text(
                             'About',
-                            style:
-                                Theme.of(context).textTheme.headline5!.copyWith(
-                                      fontFamily: 'Arial',
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                  fontFamily: 'Arial',
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
                           ),
                           const SizedBox(
                             height: 15.0,
@@ -207,10 +209,11 @@ class DetailsScreen extends StatelessWidget {
     double width = (state is PostCartsLoadingState)
         ? 70.0
         : MediaQuery.of(context).size.width;
+    ///todo
     Color color =
-        (HomeCubit.get(context).carts[model.id]!) ? Colors.red : Colors.green;
+        (HomeCubit.get(context).carts[model.id]!)/* cubit.carts[model.id]!*/ ? Colors.red : Colors.green;
     String text = (HomeCubit.get(context).carts[model.id]!)
-        ? 'Remove from cart'
+       /*cubit.carts[model.id]!*/ ? 'Remove from cart'
         : 'Add to cart';
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -226,8 +229,16 @@ class DetailsScreen extends StatelessWidget {
           color: color,
         ),
         child: (state is PostCartsLoadingState)
-            ? const Center(
-                child: CircularProgressIndicator(),
+            ? Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
               )
             : buildMaterialButton(context, text),
       ),
@@ -237,7 +248,9 @@ class DetailsScreen extends StatelessWidget {
   Widget buildMaterialButton(BuildContext context, String text) {
     return MaterialButton(
       onPressed: () {
+        ///todo
         HomeCubit.get(context).changeCarts(id: model.id!);
+        // cubit.changeCarts(id: model.id!);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -258,7 +271,7 @@ class DetailsScreen extends StatelessWidget {
             width: 10.0,
           ),
           const Icon(
-            IconlyBold.bag2,
+            IconlyBold.bag,
             color: Colors.white,
           ),
         ],
@@ -267,14 +280,8 @@ class DetailsScreen extends StatelessWidget {
   }
 
   Widget buildDetailImages({required String imageUrl}) {
-    return CachedNetworkImage(
+    return buildCachedNetworkImage(
       imageUrl: imageUrl,
     );
   }
 }
-
-// enum States {
-//   loading,
-//   success,
-//   init,
-// }

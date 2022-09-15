@@ -6,6 +6,7 @@ import 'package:shop_app/core/services/service_locator.dart';
 import 'package:shop_app/domain/entities/home/products.dart';
 import 'package:shop_app/domain/entities/search_product/search_product.dart';
 import 'package:shop_app/domain/usecases/search_usecase.dart';
+import 'package:shop_app/presentation/controllers/home_cubit/home_cubit.dart';
 
 part 'search_state.dart';
 

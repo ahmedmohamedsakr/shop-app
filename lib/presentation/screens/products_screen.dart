@@ -95,7 +95,8 @@ class ProductsScreen extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
-              buildBannerCarouselSlider(homeModel?.data?.banners?.map((e) => e.image).toList()),
+              buildBannerCarouselSlider(
+                  homeModel?.data?.banners?.map((e) => e.image).toList()),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

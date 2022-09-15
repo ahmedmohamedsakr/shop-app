@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_app/core/global/global_widget/global_widget.dart';
 import 'package:shop_app/domain/entities/home/products.dart';
 import 'package:shop_app/presentation/controllers/home_cubit/home_cubit.dart';
@@ -40,25 +41,14 @@ class FavoritesScreen extends StatelessWidget {
         direction: DismissDirection.startToEnd,
         background: Container(
           decoration: BoxDecoration(
-            color: Colors.red,
             borderRadius: BorderRadius.circular(10.0),
           ),
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.delete,
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  'Delete',
-                ),
-              ],
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Icon(
+              IconlyBold.delete,
+              color: Colors.pink,
             ),
           ),
         ),
@@ -188,7 +178,7 @@ class FavoritesScreen extends StatelessWidget {
                         Text(
                           '\$${model.price.round()}',
                           style: const TextStyle(
-                            color: Colors.black,
+                            color: Colors.indigo,
                             fontSize: 15.0,
                           ),
                         ),
